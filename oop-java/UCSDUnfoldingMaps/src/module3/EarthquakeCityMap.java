@@ -107,6 +107,7 @@ public class EarthquakeCityMap extends PApplet {
 	    map.addMarkers(markers);
 	    
 	}
+	// Added additional functions to make it easier to loop thru keys
 	public int[] loadColors(){
 		int[] colorkeys = new int[3];
 		colorkeys[0] = color(51,51,255);
