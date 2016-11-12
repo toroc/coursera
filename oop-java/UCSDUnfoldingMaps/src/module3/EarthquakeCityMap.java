@@ -1,5 +1,7 @@
 package module3;
 
+import java.applet.*;
+import java.awt.*;
 //Java utilities libraries
 import java.util.ArrayList;
 //import java.util.Collections;
@@ -204,4 +206,7 @@ public class EarthquakeCityMap extends PApplet {
 		fill(0);
 		text(keyName,60,yCoord);
 	}
+	
 }
+	
+
