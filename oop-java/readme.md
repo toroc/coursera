@@ -11,12 +11,12 @@ by University of California, San Diego on Coursera. This course focuses on data 
 
 ####module3
 EarthquakeCityMap visualizes earthquake data. The program reads data from a live RSS feed and plots markers where earthquakes of magnitude 2.5 + have occurred. The style of the earthquake markers vary by severity. The program has a simple GUI with a key of markers displayed to the left of the map.
-<img alt="module3 program" src="screenshots/eqCityMap2.png" width="200">
+<p><img alt="module3 program" src="screenshots/eqCityMap2.png" width="400"></p>
 
 
 ####module4
 This assignment builds on the previous assignment and utilizes class hierarchies to organize and improve code. Since the impact of earthquakes depends on various factors, this program visualizes different earthquakes like earthquakes over land or in the ocean.
-<img alt="module4 program" src="screenshots/mod4_eqCityMa.png" width="200">
+<p><img alt="module4 program" src="screenshots/mod4_eqCityMap.png" width="400"></p>
 
 <!-- ## Setup/Installation Requirements
 
