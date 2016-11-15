@@ -32,8 +32,8 @@ public class LifeExpectancy extends PApplet{
 	//Map: Keys -> Values .... countryID -> lifeExp
 	Map<String, Float> lifeExpByCountry;
 	//Store feature per Country
-	List<Feature> countries;
-	List<Marker> countryMarkers;
+	List<Feature> countries; //stores features
+	List<Marker> countryMarkers; //stores markers
 	
 	public void setup(){
 		//size of canvas
