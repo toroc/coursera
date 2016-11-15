@@ -1,6 +1,7 @@
 package week4cc;
 
-public class Person {
+
+public abstract class Person {
 //	private String name;
 //	public Person(String name){ this.name = name;}
 //	public boolean isAsleep(int hr){ return 22 < hr || 7 > hr;}
@@ -15,6 +16,7 @@ public class Person {
 //			System.out.println("Now online: " + this);
 //		}
 //	}
+//	public abstract void monthlyStatement(){}
 	public void method1(){
 		System.out.println("Person 1");
 	}
