@@ -141,35 +141,83 @@ public class EarthquakeCityMap extends PApplet {
 		rect(25, 50, 150, 250);
 		int xbase = 25;
 		int ybase = 50;
-		
+
+		int y_offset = 20;
+		int x_offset = 10;
 		fill(0);
 		textAlign(LEFT, CENTER);
 		textSize(12);
 		text("Earthquake Key", 50, 75);
 
-		//Triangles
-		int tri_xbase = xbase + 35;
-		int tri_ybase = ybase + 50;
-		triangle(tri_xbase, tri_ybase-CityMarker.TRI_SIZE, tri_xbase-CityMarker.TRI_SIZE,
-				tri_ybase+CityMarker.TRI_SIZE, tri_xbase+CityMarker.TRI_SIZE,
+		//Calculate Coordinates
+		int tri_xbase, tri_ybase, cir_ybase,sq_ybase, all_xbase;
+		all_xbase = xbase + 25;
+		tri_ybase = ybase + 50;
+		cir_ybase = tri_ybase + y_offset;
+		sq_ybase = cir_ybase + y_offset;
+
+
+		// KEY TEXTS
+		fill(0,0,0);
+		textAlign(LEFT, CENTER);
+		text("City Marker", all_xbase + x_offset, tri_ybase);
+		text("Land Quake", all_xbase + x_offset, cir_ybase);
+		text("Ocean Quake", all_xbase + x_offset, sq_ybase);
+		text("Size ~ Magnitude", all_xbase - x_offset, sq_ybase + 2*y_offset);
+		text("Shallow", all_xbase+x_offset, y_offset*3 + sq_ybase);
+		text("Intermedia", all_xbase+x_offset, y_offset*4 + sq_ybase);
+		text("Deep", all_xbase+x_offset, y_offset*5+sq_ybase);
+		text("Past hour", all_xbase+x_offset, y_offset*6+sq_ybase);
+
+		//Shapes
+		// Red Triangles represent Cities
+		fill(255,0,0);
+		triangle(all_xbase, tri_ybase-CityMarker.TRI_SIZE, all_xbase-CityMarker.TRI_SIZE,
+				tri_ybase+CityMarker.TRI_SIZE, all_xbase+CityMarker.TRI_SIZE,
 				tri_ybase+CityMarker.TRI_SIZE);
 
-		fill(0, 0, 0);
-		textAlign(LEFT, CENTER);
-		text("City Marker", tri_xbase + 15, tri_ybase);
+		//Land Earthquakes as white circles
+		fill(255);
+		ellipse(all_xbase, cir_ybase, 10, 10);
+
+		//Ocean Quakes as white squares
+		rect(all_xbase-5,sq_ybase-5,10,10 );
+
+		//Shallow Key
+		fill(255,255,0);
+		ellipse(all_xbase,y_offset*3 + sq_ybase, 10,10);
+		//Intermediate Key
+		fill(0,0,255);
+		ellipse(all_xbase,y_offset*4+sq_ybase,10,10);
+		//Deep Key
+		fill(255,0,0);
+		ellipse(all_xbase,y_offset*5+sq_ybase,10,10);
+
+		//Past Hour Key
+		fill(255);
+		ellipse(all_xbase, y_offset*6+sq_ybase,10,10);
+		strokeWeight(1);
+		int ph_ybase = y_offset*6+sq_ybase;
+		int ph_offset = 1;
+		int radius = 5;
+		//line from top left to bottom right
+		line(all_xbase-(radius+ph_offset), ph_ybase-(radius + ph_offset), all_xbase+radius+ph_offset, ph_ybase+radius+ph_offset);
+		//line from bottom left to top right
+		line(all_xbase-(radius+ph_offset), ph_ybase+radius+ph_offset, all_xbase+radius+ph_offset,ph_ybase-(radius+ph_offset));
 
 
-		fill(color(255, 0, 0));
-		ellipse(50, 125, 15, 15);
-		fill(color(255, 255, 0));
-		ellipse(50, 175, 10, 10);
-		fill(color(0, 0, 255));
-		ellipse(50, 225, 5, 5);
-		
-		fill(0, 0, 0);
-		text("5.0+ Magnitude", 75, 125);
-		text("4.0+ Magnitude", 75, 175);
-		text("Below 4.0", 75, 225);
+		//older keys
+//		fill(color(255, 0, 0));
+//		ellipse(50, 125, 15, 15);
+//		fill(color(255, 255, 0));
+//		ellipse(50, 175, 10, 10);
+//		fill(color(0, 0, 255));
+//		ellipse(50, 225, 5, 5);
+//
+//		fill(0, 0, 0);
+//		text("5.0+ Magnitude", 75, 125);
+//		text("4.0+ Magnitude", 75, 175);
+//		text("Below 4.0", 75, 225);
 	}
 
 	
