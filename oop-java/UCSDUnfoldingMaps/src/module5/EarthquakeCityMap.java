@@ -14,6 +14,7 @@ import de.fhpotsdam.unfolding.marker.MultiMarker;
 import de.fhpotsdam.unfolding.providers.Microsoft;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
 import de.fhpotsdam.unfolding.utils.MapUtils;
+import de.fhpotsdam.unfolding.utils.ScreenPosition;
 import parsing.ParseFeed;
 import processing.core.PApplet;
 
@@ -57,7 +58,7 @@ public class EarthquakeCityMap extends PApplet {
 
 	// A List of country markers
 	private List<Marker> countryMarkers;
-	
+
 	// NEW IN MODULE 5
 	private CommonMarker lastSelected;
 	private CommonMarker lastClicked;
@@ -180,14 +181,108 @@ public class EarthquakeCityMap extends PApplet {
 		// TODO: Implement this method
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
+		if(lastClicked != null){
+			/*de-select marker that was last clicked*/
+			CommonMarker m = lastClicked;
+			m.setSelected(false);
+			lastClicked = null;
+			/*Unhide the hidden markers*/
+			unhideMarkers();
+		}
+		else{
+			/*determine if earthquakes were clicked*/
+			checkEarthquakeClicks();
+			if (lastClicked == null){
+				/*Determine if cities were clicked*/
+				checkCityClicks();
+			}
 
-		/*Iterate through eq and city markers and see if any have been clicked*/
-		/*If they have, iterate through other markers to hide the ones that shouldnt be displayed
-		* */
-
+		}
 	}
-	
-	
+	private void checkCityClicks(){
+		if (lastClicked != null){
+			return;
+		}
+		/*Loop thru the city markers*/
+		for(Marker marker: cityMarkers){
+			/*Cast as a CityMarker*/
+			CityMarker cm = (CityMarker)marker;
+			/*Skip hidden cms & check if non-hidden are inside x,y*/
+			if (!cm.isHidden() && cm.isInside(map, mouseX, mouseY)){
+				/*Found the clicked city marker*/
+				lastClicked = cm;
+				cm.setSelected(true);
+
+				/*Hide other cities*/
+				for (Marker toHide: cityMarkers){
+					if(toHide != lastClicked){
+						/*Hide city marker*/
+						toHide.setHidden(true);
+					}
+				}
+				/*Hide other earthquakes not inside threat circle*/
+				for (Marker toHide: quakeMarkers){
+					/*Cast as EQ marker*/
+					EarthquakeMarker em = (EarthquakeMarker)toHide;
+					/*Get distance from earthquake to city, if distance is greater
+					* than EQ's threatcircle then hide the earthquake*/
+					if(em.getDistanceTo(cm.getLocation()) > em.threatCircle()){
+						toHide.setHidden(true);
+					}
+				}
+				/*Found the selected marker, exits*/
+				return;
+			}
+		}
+	}
+	private void checkEarthquakeClicks(){
+		if (lastClicked != null){
+			/*marker has been clicked, should exit*/
+			return;
+		}
+
+		/*Loop through the quake markers*/
+		for (Marker marker: quakeMarkers){
+			/*Cast as an EarthquakeMarker*/
+			EarthquakeMarker em = (EarthquakeMarker)marker;
+			/*Skip hidden markers & check if non-hidden markers are inside x, y positions*/
+			if (!em.isHidden() && em.isInside(map, mouseX, mouseY)){
+				/*Found the clicked marker*/
+				lastClicked = em;
+				em.setSelected(true);
+				/*Hide other earthquakes*/
+				for (Marker toHide: quakeMarkers){
+					/*toHide markers is not the last clicked*/
+					if (toHide != lastClicked){
+						/*Hide the marker*/
+						toHide.setHidden(true);
+					}
+				}
+				/*Check if is type OceanQuakeMarker*/
+//				if(!em.isOnLand()){
+//					OceanQuakeMarker om = (OceanQuakeMarker)em;
+//				}
+				/*Hide cities unless within threat location*/
+				for (Marker toHide: cityMarkers){
+					/*Check that city's distance to earthquake is greater than the eq's threat circle*/
+					if(toHide.getDistanceTo(em.getLocation()) > em.threatCircle()){
+						/*hide the city marker*/
+						toHide.setHidden(true);
+					}
+				}
+				/*Found selected marker*/
+				return;
+			}
+		}
+	}
+
+//	private void drawOceanlines(Location city){
+//
+//		stroke(4);
+////		ScreenPosition cur = ScreenPosition();
+//		line(mouseX,mouseY,city.getLat(), city.getLon());
+//	}
+
 	// loop over and unhide all markers
 	private void unhideMarkers() {
 		for(Marker marker : quakeMarkers) {
@@ -261,8 +356,6 @@ public class EarthquakeCityMap extends PApplet {
 		line(centerx-8, centery+8, centerx+8, centery-8);
 			
 	}
-
-	
 	
 	// Checks whether this quake occurred on land.  If it did, it sets the 
 	// "country" property of its PointFeature to the country where it occurred

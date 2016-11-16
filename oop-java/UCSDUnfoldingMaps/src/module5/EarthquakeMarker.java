@@ -1,13 +1,16 @@
 package module5;
 
 import de.fhpotsdam.unfolding.data.PointFeature;
+import de.fhpotsdam.unfolding.marker.Marker;
 import processing.core.PConstants;
 import processing.core.PGraphics;
+
+import java.util.List;
 
 /** Implements a visual marker for earthquakes on an earthquake map
  * 
  * @author UC San Diego Intermediate Software Development MOOC team
- * @author Your name here
+ * @author Carol D. Toro
  *
  */
 public abstract class EarthquakeMarker extends CommonMarker
@@ -21,8 +24,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 	// using the thresholds below, or a continuous function
 	// based on magnitude. 
 	protected float radius;
-	
-	
+
 	// constants for distance
 	protected static final float kmPerMile = 1.6f;
 	
@@ -105,14 +107,13 @@ public abstract class EarthquakeMarker extends CommonMarker
 		pg.rectMode(PConstants.CORNER);
 		pg.stroke(110);
 		pg.fill(255,255,255);
-		pg.rect(x, y+y_offset, t_width+y_offset,y_offset*2);
+		/*Create rectangle with width of text + y offset
+		* and height of 2 times y offset*/
+		pg.rect(x, (y+y_offset), (t_width + y_offset),(y_offset * 2));
 		pg.fill(0);
-		//Align the text ot the top left
+		/*Align the text ot the top left*/
 		pg.textAlign(PConstants.LEFT, PConstants.TOP);
-
 		pg.text(title, x + x_offset, y+y_offset+small_offset);
-		//pg.text(title,x, y);
-		//pg.text(title,x, y);
 		pg.popStyle();
 		
 	}

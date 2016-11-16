@@ -69,13 +69,14 @@ public class CityMarker extends CommonMarker {
 		pg.rectMode(PConstants.CORNER); //modify location to corners
 		/*Make rectangle width the length of max text plus the y-offset and triangle size*/
 		/*Height of rectangle can be the total offset of 40*/
-		pg.rect(x, y -TRI_SIZE - offset, max_text + y_offset+x_offset, offset);
+		pg.rect(x, y -TRI_SIZE - offset, (max_text + y_offset + x_offset), offset);
 		pg.fill(0,0,0);
 		/*Align to the top left of rect*/
 		pg.textAlign(PConstants.LEFT, PConstants.TOP);
 		/*Add the text*/
-		pg.text(title, x + x_offset, y - TRI_SIZE - offset+2);
-		pg.text(pop, x+x_offset, y-TRI_SIZE-(offset/2));
+		pg.text(title, (x + x_offset), (y - TRI_SIZE - offset+2));
+		/*Add population text half thru box*/
+		pg.text(pop, (x + x_offset), (y-TRI_SIZE-(offset/2)));
 		pg.popStyle();
 	}
 	
