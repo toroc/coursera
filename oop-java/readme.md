@@ -11,13 +11,35 @@ by University of California, San Diego on Coursera. This course focuses on data 
 
 ####module3
 EarthquakeCityMap visualizes earthquake data. The program reads data from a live RSS feed and plots markers where earthquakes of magnitude 2.5 + have occurred. The style of the earthquake markers vary by severity. The program has a simple GUI with a key of markers displayed to the left of the map.
-<p><img alt="module3 program" src="screenshots/eqCityMap2.png" width="400"></p>
+<p><img alt="module3 program" src="screenshots/eqCityMap2.png" width="600"></p>
 
 
 ####module4
-This assignment builds on the previous assignment and utilizes class hierarchies to organize and improve code. Since the impact of earthquakes depends on various factors, this program visualizes different earthquakes like earthquakes over land or in the ocean.
-<p><img alt="module4 program" src="screenshots/mod4_eqCityMap.png" width="400"></p>
+This assignment builds on the previous assignment and utilizes class hierarchies to organize and improve code. Since the impact of earthquakes depends on various factors, this program visualizes different earthquakes like earthquakes over land, in the ocean, or earthquakes that occurred in the past hour. Each type of earthquake also has an additional key for its depth. 
+<p><img alt="module4 program" src="screenshots/mod4_eqCityMap.png" width="600"></p>
 
+
+####module5
+This assignment creates an interactive map with event handlers for hovering and clicking. When hovering over a city marker, map displays information about that city. Hovering over an earthquake results in the map displaying the title of the earthquake along with the magnitude and region it occured. Clicking on a city will lead to only displaying that city and showing only earthquakes that affect that city. Clicking again on a marker will display all of the original markers on the map. Likewise, clicking on an earthquake marker will populate on the map only the cities potentially affected by that earthquake.
+<table>
+<tr>
+	<td>
+		<img alt="Hover over city marker" src="screenshots/mod5_city_hover.png" width="400">
+	</td>
+	<td>
+		<img alt="Select city on map" src="screenshots/mod5_city_select.png" width="400">
+		<p>Displays earthquakes near selected city.</p>
+	</td>
+</tr>
+<tr>
+	<td>
+		<img src="screenshots/mod5_eq_select_hover.png" alt="Select earthquake and hover over marker">
+	</td>
+	<td>
+		<img src="screenshots/mod5_eq_select.png" alt="non-selected earthquakes are hidden">
+		<p>Non-selected earthquakes are hidden and cities outside threat zone are also hidden.</p>
+	</td>
+</tr>
 <!-- ## Setup/Installation Requirements
 
 * _This is a great place_

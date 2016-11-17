@@ -55,7 +55,7 @@ public class CityMarker extends CommonMarker {
 		// TODO: Implement this method
 		/*Get City Name, Country, and Population*/
 		String title = getCity() + ", " + getCountry() + " ";
-		String pop = "Pop: " + getPopulation() + " (unit)";
+		String pop = "Pop: " + getPopulation() + " Million";
 		int offset = 40;
 		int x_offset = TRI_SIZE * 2;
 		int y_offset = 15;
