@@ -47,7 +47,7 @@ public class EarthquakeCityMap extends PApplet {
 	private static final long serialVersionUID = 1L;
 
 	// IF YOU ARE WORKING OFFILINE, change the value of this variable to true
-	private static final boolean offline = false;
+	private static final boolean offline = true;
 	
 	/** This is where to find the local tiles, for working without an Internet connection */
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
@@ -138,14 +138,15 @@ public class EarthquakeCityMap extends PApplet {
 		loadIntervals(rangeCount);
 		rangeColors = generateColors(rangeCount);
 		shadeCountries();
+		/*Add country markers*/
+		map.addMarkers(countryMarkers);
 	 		
 	    // (3) Add markers to map
 	    //     NOTE: Country markers are not added to the map.  They are used
 	    //           for their geometric properties
 	    map.addMarkers(quakeMarkers);
 	    map.addMarkers(cityMarkers);
-		/*Add country markers*/
-		map.addMarkers(countryMarkers);
+		
 
 
 	    
@@ -240,6 +241,28 @@ public class EarthquakeCityMap extends PApplet {
 			checkEarthquakesForClick();
 			if (lastClicked == null) {
 				checkCitiesForClick();
+			}
+		}
+	}
+	/*Helper method to check if emissions was clicked off*/
+	private void checkEmForClick()
+	{
+		
+		if(lastClicked != null) return;
+		
+		for(Marker marker: countryMarkers)
+		{
+			if(!marker.isHidden() && marker.isInside(map, mouseX, mouseY)){
+				lastClicked = (CommonMarker)marker;
+				//Hide all other countries
+				for(Marker chide: countryMarkers)
+				{
+					if(chide != lastClicked)
+					{
+						chide.setHidden(true);
+					}
+				}
+				return;
 			}
 		}
 	}
@@ -373,7 +396,7 @@ public class EarthquakeCityMap extends PApplet {
 		
 	}
 
-	
+	/*Helper Method to add the keys pertaining to C02 Emmisions*/
 	private void addEmissionKey()
 	{
 		/*Create rectangle to store Emission key*/
@@ -385,15 +408,21 @@ public class EarthquakeCityMap extends PApplet {
 		textAlign(LEFT, CENTER);
 		textSize(12);
 		text("CO2 Emissions",40, 380);
-
+		int yCoord = 400;
+		
+		/*Add Key for missing data*/
+		addKeys(yCoord, rangeColors[rangeCount].getRGB(),rangeValues[rangeCount].length(), rangeValues[rangeCount]);
 
 		/*Add Key Items*/
-		int yCoord = 420;
+		yCoord += 20;
 		for (int i=0; i < this.rangeCount; i++)
 		{
 			addKeys(yCoord, rangeColors[i].getRGB(), rangeStrSizes[i], rangeValues[i]);
 			yCoord += 20;
 		}
+		
+		text("Metric Tons per Capita", 30, yCoord+10);
+		
 	}
 
 	private void addKeys(int yCoord, int keyColor, int keySize, String keyName)
@@ -520,7 +549,7 @@ public class EarthquakeCityMap extends PApplet {
 		float totalLength = max - min;
 		float subrange_lenth = totalLength / n;
 		float [] rangeLimit =new float[n];
-		String [] rangeIntervals = new String[n];
+		String [] rangeIntervals = new String[n+1];
 
 		float curr_start = min;
 		for (int i=0; i < n; i++){
@@ -530,6 +559,8 @@ public class EarthquakeCityMap extends PApplet {
 			curr_start += subrange_lenth;
 			rangeLimit[i] = curr_start;
 		}
+		/*Add n/a for missing data*/
+		rangeIntervals[n] = "n/a";
 		rangeValues = rangeIntervals;
 		rangeLimits = rangeLimit;
 		rangeStrSizes = loadValSizes();
@@ -541,6 +572,7 @@ public class EarthquakeCityMap extends PApplet {
 		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
 		return bd.floatValue();
 	}
+	/*Helper Function to load Interval Values */
 	private int[] loadValSizes()
 	{
 		int[] sizes = new int[this.rangeCount];
@@ -552,28 +584,34 @@ public class EarthquakeCityMap extends PApplet {
 
 		return sizes;
 	}
+	
+	/*Generate n colors with the n+1 being gray*/
 	private Color[] generateColors(int n)
 	{
 		double alpha = 0.4;
-		Color[] colors = new Color[n];
+		Color[] colors = new Color[n+1];
 		for (int i=0; i < n; i++)
 		{
 			Color c2 = Color.getHSBColor((float)i / (float) n, 0.85f, 1.0f);
 			/*Make the color transparent*/
-
-			colors[i]= new Color(c2.getRed(), c2.getGreen(), c2.getBlue(), c2.getAlpha());
+			colors[i]= new Color(c2.getRed(), c2.getGreen(), c2.getBlue(), 50);
 
 		}
+		
+		/*Add gray color*/
+		colors[n] = new Color(0,0,0,50);
 
 		return colors;
 	}
+	/*Helper method to print the colors*/
 	private void printColors()
 	{
 		for( Color c: rangeColors){
 			System.out.println(c);
 		}
 	}
-
+	
+	/*Helper method to shade countries based off emission values*/
 	private void shadeCountries(){
 		/*Iterate over the countryMarkers*/
 		float min = Collections.min(co2ByCountry.values());
@@ -587,15 +625,19 @@ public class EarthquakeCityMap extends PApplet {
 				float emission = co2ByCountry.get(countryID);
 				System.out.println("Emission for country is: " + emission);
 				Color col = getColor(emission);
-				Color col3 = new Color(col.getRed(), col.getGreen(), col.getBlue(),50);
-				marker.setColor(col3.getRGB());
+				//Color col3 = new Color(col.getRed(), col.getGreen(), col.getBlue(),50);
+				marker.setColor(col.getRGB());
 			}
 			else{
-				marker.setColor(color(0,0,0));
+				//Set as gray
+				Color col = rangeColors[rangeCount];
+				marker.setColor(col.getRGB());
 			}
 		}
 		printColors();
 	}
+	
+	/*Helper method to return the color based on country's emission*/
 	private Color getColor(float emission){
 
 		for (int i=0; i < rangeCount; i++)
@@ -607,6 +649,6 @@ public class EarthquakeCityMap extends PApplet {
 			}
 		}
 
-		return new Color(150,150,150);
+		return rangeColors[rangeCount];
 	}
 }
