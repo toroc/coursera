@@ -33,13 +33,16 @@ This assignment creates an interactive map with event handlers for hovering and 
 </tr>
 <tr>
 	<td>
-		<img src="screenshots/mod5_eq_select_hover.png" alt="Select earthquake and hover over marker">
+		<img src="screenshots/mod5_eq_select_hover.png" alt="Select earthquake and hover over marker" width="400">
 	</td>
 	<td>
-		<img src="screenshots/mod5_eq_select.png" alt="non-selected earthquakes are hidden">
+		<img src="screenshots/mod5_eq_select.png" alt="non-selected earthquakes are hidden" width="400">
 		<p>Non-selected earthquakes are hidden and cities outside threat zone are also hidden.</p>
 	</td>
 </tr>
+</table>
+####module6
+This assignment creates an interactive map with event handlers for hovering and clicking. When hovering over a city marker, map displays information about that city. Hovering over an earthquake results in the map displaying the title of the earthquake along with the magnitude and region it occured. Clicking on a city will lead to only displaying that city and showing only earthquakes that affect that city. Clicking again on a marker will display all of the original markers on the map. Likewise, clicking on an earthquake marker will populate on the map only the cities potentially affected by that earthquake.
 <!-- ## Setup/Installation Requirements
 
 * _This is a great place_
