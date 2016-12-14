@@ -50,10 +50,7 @@ This assignment builds on the previous assignment to organize earthquake data an
 	<tr>
 		<td>
 		<img alt="Overall Map" src="screenshots/mod6_main_map.png" width="400">
-		</td>
-		<td>
-			<img alt="Select city on map" src="screenshots/mod5_city_select.png" width="400">
-			<p>Countries shaded based on yearly CO2 Emissions</p>
+		<p>Countries shaded based on yearly CO2 Emissions</p>
 		</td>
 	</tr>
 	<tr>
@@ -61,6 +58,8 @@ This assignment builds on the previous assignment to organize earthquake data an
 			<img src="screenshots/mod6_eq_hover.png" alt="Hover over city" width="400">
 			<p>City details still displayed despite shading of countries.</p>
 		</td>
+	</tr>
+	<tr>
 		<td>
 			<img src="screenshots/mod6_selected_colored_map.png" alt="non-selected earthquakes are hidden" width="400">
 			<p>Non-selected earthquakes are hidden and cities outside threat zone are also hidden.</p>
