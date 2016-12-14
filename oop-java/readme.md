@@ -22,27 +22,51 @@ This assignment builds on the previous assignment and utilizes class hierarchies
 ####module5
 This assignment creates an interactive map with event handlers for hovering and clicking. When hovering over a city marker, map displays information about that city. Hovering over an earthquake results in the map displaying the title of the earthquake along with the magnitude and region it occured. Clicking on a city will lead to only displaying that city and showing only earthquakes that affect that city. Clicking again on a marker will display all of the original markers on the map. Likewise, clicking on an earthquake marker will populate on the map only the cities potentially affected by that earthquake.
 <table>
-<tr>
-	<td>
-		<img alt="Hover over city marker" src="screenshots/mod5_city_hover.png" width="400">
-	</td>
-	<td>
-		<img alt="Select city on map" src="screenshots/mod5_city_select.png" width="400">
-		<p>Displays earthquakes near selected city.</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<img src="screenshots/mod5_eq_select_hover.png" alt="Select earthquake and hover over marker" width="400">
-	</td>
-	<td>
-		<img src="screenshots/mod5_eq_select.png" alt="non-selected earthquakes are hidden" width="400">
-		<p>Non-selected earthquakes are hidden and cities outside threat zone are also hidden.</p>
-	</td>
-</tr>
+	<tr>
+		<td>
+			<img alt="Hover over city marker" src="screenshots/mod5_city_hover.png" width="400">
+			<p>Hovering over city marker, displays city's name and population.</p>
+		</td>
+		<td>
+			<img alt="Select city on map" src="screenshots/mod5_city_select.png" width="400">
+			<p>Selecting a city, displays earthquakes near selected city.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="screenshots/mod5_eq_select_hover.png" alt="Select earthquake and hover over marker" width="400">
+			<p>Hovering over earthquake results in display of earthquake's magnitude and name of nearest city to earthquake</p>
+		</td>
+		<td>
+			<img src="screenshots/mod5_eq_select.png" alt="non-selected earthquakes are hidden" width="400">
+			<p>Non-selected earthquakes are hidden and cities outside the earthquake's threat zone are also hidden.</p>
+		</td>
+	</tr>
 </table>
 ####module6
-This assignment creates an interactive map with event handlers for hovering and clicking. When hovering over a city marker, map displays information about that city. Hovering over an earthquake results in the map displaying the title of the earthquake along with the magnitude and region it occured. Clicking on a city will lead to only displaying that city and showing only earthquakes that affect that city. Clicking again on a marker will display all of the original markers on the map. Likewise, clicking on an earthquake marker will populate on the map only the cities potentially affected by that earthquake.
+This assignment builds on the previous assignment to organize earthquake data and compute additional statistics. Earthquake Markers utilize the Comparable Interface which allows the sorting of earthquakes in reverse order of magnitude. The top highest magnitude earthquakes are printed to the console. Furthermore, each country on the map is shaded a different color to represent its value in CO2 Carbon Emmissions. 
+
+<table>
+	<tr>
+		<td>
+		<img alt="Overall Map" src="screenshots/mod6_main_map.png" width="400">
+		</td>
+		<td>
+			<img alt="Select city on map" src="screenshots/mod5_city_select.png" width="400">
+			<p>Countries shaded based on yearly CO2 Emissions</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="screenshots/mod6_eq_hover.png" alt="Hover over city" width="400">
+			<p>City details still displayed despite shading of countries.</p>
+		</td>
+		<td>
+			<img src="screenshots/mod6_selected_colored_map.png" alt="non-selected earthquakes are hidden" width="400">
+			<p>Non-selected earthquakes are hidden and cities outside threat zone are also hidden.</p>
+		</td>
+	</tr>
+</table>
 <!-- ## Setup/Installation Requirements
 
 * _This is a great place_
