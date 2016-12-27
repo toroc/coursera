@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Color Guessing Game Part 1</title>
+</head>
+<body onload="do_game()">
+<script>
+
+/*Global variables*/
+var target_index;
+var target;
+var guess_input;
+var finished = false;
+var guesses = 0;
+var index;
+var colors = ["Aqua", "Black", "Brown", "DeepPink", "DeepSkyBlue", "DodgerBlue", "Gray", "Lime", "Magenta", "Navy", "Orange", "Violet", "Yellow"];
+function do_game(){
+    /*Generate random color*/
+    var num_colors = colors.length;
+    /*Index may range from 0 to N*/
+    target_index = Math.floor(Math.random()*num_colors);
+    var chosen = colors[target_index];
+    alert("The chosen color is " + chosen);
+
+    while(!finished){
+        guess_input = prompt("I'm thinking of one of the following colors:\n\n" + colors.join(", ") +"\n\nWhat is that color?");
+        guesses += 1;
+        finished = check_guess();
+    }
+
+}
+
+function check_guess(){
+    var pos = colors.indexOf(guess_input);
+    /*Check color not in array*/
+    if (pos == -1){
+        return false;
+    }
+    /*Check if higher than target*/
+    if (pos > target_index){
+        return false;
+    }
+    if (pos < target_index){
+        return false;
+    }
+
+    return true;
+
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Part 3. Web page content with left side images & right side of images</title>
+
+  <style>
+  img {
+      position: absolute;
+  }
+  div {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+  }
+  #rightSide{
+      position: absolute;
+      left: 500px;
+      border-left: 1px solid black;
+  }
+
+  </style>
+</head>
+<body id="theBody" onload="generateFaces()">
+<h1>Matching Game</h1>
+<p>Click on the extra smiling face on the left.</p>
+<div id="leftSide"></div>
+<div id="rightSide"></div>
+
+<script>
+/*Variables*/
+var numberOfFaces = 5;
+var theLeftSide = document.getElementById("leftSide");
+var theRightSide = document.getElementById("rightSide");
+
+function generateFaces(){
+
+    /*Loop & create faces*/
+    for(var i =0; i < numberOfFaces; i++){
+        // create face
+        var this_face = createImg();
+        // add face to page
+        addImage(theLeftSide, this_face);
+    }
+    /*Clone the images on the left side to the right side*/
+    cloneToRight();
+
+}
+
+/*Creates smiley image*/
+function createImg(){
+    //console.log("Creating smiley image");
+    /*Calculate random positions b/w 0-400*/
+    var top_pos = Math.floor(Math.random()*400);
+    var left_pos = Math.floor(Math.random()*400);
+    var this_img = document.createElement("img");
+    this_img.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+    /*Set image position*/
+    this_img.style.top = top_pos + "px";
+    this_img.style.left = left_pos + "px";
+    return this_img;
+}
+
+function addImage(parent, child){
+    parent.appendChild(child);
+}
+
+function cloneToRight(){
+
+    var leftSideImages = theLeftSide.cloneNode(true);
+    /*Delete last child */
+    leftSideImages.removeChild(leftSideImages.lastChild);
+    /*Add left side to right side*/
+    rightSide.appendChild(leftSideImages);
+}
+</script>
+</body>
+</html>

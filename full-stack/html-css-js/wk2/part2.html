@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Color Guessing Game Part 2</title>
+</head>
+<body onload="do_game()">
+<script>
+
+/*Global variables*/
+var target_index;
+var target;
+var guess_input;
+var finished = false;
+var guesses = 0;
+var index;
+var colors = ["Aqua", "Black", "Brown", "DeepPink", "DeepSkyBlue", "DodgerBlue", "Gray", "Lime", "Magenta", "Navy", "Orange", "Violet", "Yellow"];
+function do_game(){
+    /*Generate random color*/
+    var num_colors = colors.length;
+    /*Index may range from 0 to N*/
+    target_index = Math.floor(Math.random()*num_colors);
+    target = colors[target_index];
+    alert("The chosen color is " + target);
+
+    while(!finished){
+        guess_input = prompt("I'm thinking of one of the following colors:\n\n" + colors.join(", ") +"\n\nWhat is that color?");
+        guesses += 1;
+        finished = check_guess();
+    }
+
+}
+
+function check_guess(){
+    var pos = colors.indexOf(guess_input);
+    /*Check color not in array*/
+    if (pos == -1){
+        alert("That color is not in my color list.\n\nPlease try again.");
+        return false;
+    }
+    /*Check if higher than target*/
+    if (pos > target_index){
+        alert("Your color is alphabetically higher than my color.\n\nPlease try again.");
+        return false;
+    }
+    if (pos < target_index){
+        alert("Your color is alphabetically lower than my color.\n\nPlease try again.");
+        return false;
+    }
+    set_bg_color();
+    alert("Congratulations! You guessed the correct color.\n\nIt took you " + guesses + " attempts.\nYou can see the color in the background.");
+    return true;
+}
+function set_bg_color(){
+    /*Set the background color*/
+    docBody = document.getElementsByTagName("body")[0];
+    docBody.style.background=target;
+}
+</script>
+
+</body>
+</html>
