@@ -1,0 +1,26 @@
+{
+  "name": "confusion",
+  "homepage": "https://github.com/toroc/coursera",
+  "authors": [
+    "Carol D. Toro <toroc@oregonstate.edu>"
+  ],
+  "description": "Website for ConFusion restaurant",
+  "main": "index.html",
+  "keywords": [
+    "conFusion",
+    "Fusion",
+    "Restaurant"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}
